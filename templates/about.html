@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}About - DataSyncSvc{% endblock %}
+{% block particles %}
+<div id="particles-js" class="absolute inset-0"></div>
+{% endblock %}
+{% block content %}
+    <!-- Hero Section -->
+    <section class="py-20 about-section">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-blue-400 mb-6 animate-slide-in">Who We Are</h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto animate-slide-up">DataSyncSvc is a leading blockchain synchronization platform, empowering users with seamless wallet recovery and asset management solutions.</p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="about-card mission-card max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-semibold mb-4">Our Mission</h2>
+                <p>To revolutionize blockchain accessibility by providing secure, user-friendly tools for managing digital assets across multiple chains.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-16 timeline-section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-blue-400 text-center mb-12 animate-slide-in">Our Journey</h2>
+            <div class="space-y-8 max-w-2xl mx-auto">
+                <div class="timeline-item animate-slide-up">
+                    <h3 class="text-xl font-semibold">2022 - Founded</h3>
+                    <p>DataSyncSvc was born to address blockchain wallet challenges.</p>
+                </div>
+                <div class="timeline-item animate-slide-up">
+                    <h3 class="text-xl font-semibold">2023 - First Solution</h3>
+                    <p>Launched our wallet recovery tool, helping thousands.</p>
+                </div>
+                <div class="timeline-item animate-slide-up">
+                    <h3 class="text-xl font-semibold">2024 - Global Reach</h3>
+                    <p>Expanded to support 21 blockchain services worldwide.</p>
+                </div>
+                <div class="timeline-item animate-slide-up">
+                    <h3 class="text-xl font-semibold">2025 - Innovation</h3>
+                    <p>Introduced advanced DeFi and NFT synchronization tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    {% comment %} <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-blue-400 text-center mb-12 animate-slide-in">Our Team</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="about-card max-w-sm mx-auto text-center animate-slide-up">
+                    <img src="https://via.placeholder.com/150" alt="Team Member" class="rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold">John Doe</h3>
+                    <p class="text-sm text-blue-400">CEO & Founder</p>
+                    <p>Visionary leader in blockchain technology.</p>
+                </div>
+                <div class="about-card max-w-sm mx-auto text-center animate-slide-up">
+                    <img src="https://via.placeholder.com/150" alt="Team Member" class="rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold">Jane Smith</h3>
+                    <p class="text-sm text-blue-400">CTO</p>
+                    <p>Expert in secure wallet solutions.</p>
+                </div>
+                <div class="about-card max-w-sm mx-auto text-center animate-slide-up">
+                    <img src="https://via.placeholder.com/150" alt="Team Member" class="rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold">Alex Lee</h3>
+                    <p class="text-sm text-blue-400">Lead Developer</p>
+                    <p>Architect of our sync platform.</p>
+                </div>
+            </div>
+        </div>
+    </section> {% endcomment %}
+{% endblock %}

